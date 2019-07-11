@@ -14,6 +14,8 @@ body {
 	background-image: url(${bgImage});
 	background-position: center center;
 	background-size: cover;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 nav {
@@ -21,15 +23,44 @@ nav {
 }
 
 #mainContent {
-	height: 100%;
 }
 
-#mainContent > div:first-child, div:last-child {
-	height: 20%;
+#footer p {
+	font-weight: bold;
+	margin-inline-start: 1rem;
 }
 
-#mainContent > div:nth-child(2) {
-	height: 60%;
+@media (max-width: 1200px) {
+	legend {
+		font-size: calc(1.275rem + 0.3vw);
+	}
+	h1, .h1 {
+		font-size: calc(1.375rem + 1.5vw) !important;
+	}
+	h2, .h2 {
+		font-size: calc(1.325rem + 0.9vw);
+	}
+	h3, .h3 {
+		font-size: calc(1.3rem + 0.6vw);
+	}
+	h4, .h4 {
+		font-size: calc(1.275rem + 0.3vw);
+	}
+	.display-1 {
+		font-size: calc(1.725rem + 5.7vw);
+	}
+	.display-2 {
+		font-size: calc(1.675rem + 5.1vw);
+	}
+	.display-3 {
+		font-size: calc(1.575rem + 3.9vw);
+	}
+	.display-4 {
+		font-size: calc(1.475rem + 2.7vw);
+	}
+	.close {
+		font-size: calc(1.275rem + 0.3vw);
+	}
 }`;
 
 	return css

@@ -1,10 +1,13 @@
 // index.js
-const serverless = require('serverless-http');
+const serverless = require('serverless-http')
 const express = require('express')
 const app = express()
+const fs = require('fs')
+//var favicon = require('serve-favicon')
 
 //var dynamicHtml = `<h1>Home?</h1>`
 function buildHTML (cssPath = '', dynamicHtml = '') {
+	var year = new Date().getFullYear();
 	var html = `<!doctype html>
 	<html lang="en">
 	  <head>
@@ -18,6 +21,7 @@ function buildHTML (cssPath = '', dynamicHtml = '') {
 	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 	    <link href="https://fonts.googleapis.com/css?family=Gravitas+One" rel="stylesheet">
 	    <link href="/css/${cssPath}" rel="stylesheet">
+	    <link rel='shortcut icon' type='image/x-icon' href='https://my-portfolio-dev-images.s3-us-west-2.amazonaws.com/favicon.ico' />
 
 	    <title>Hello, world!</title>
 	  </head>
@@ -36,17 +40,28 @@ function buildHTML (cssPath = '', dynamicHtml = '') {
 		    </div>
 		  </div>
 		</nav>
-		<div id="mainContent" class="container-fluid"">
-		  <div class="row">
-		  </div>
-		  <div class="row justify-content-center"">
+		<div id="mainContent" class="container-fluid">
+		  <div class="row justify-content-center">
 		    <div class="col-6">
 		    ${dynamicHtml}
 		    </div>
 		  </div>
-		  <div class="row"">
+		  <div id="footer" class="row fixed-bottom">
+		    <div class="col-5">
+		      <p>Jacob Anavisca ©${year}</p>
+		    </div>
+		    <div class="col-2 text-center">
+		    	<a class="fab fa-facebook-square pull-right fa-2x" href="https://www.facebook.com/jacob.anavisca"></a>
+    			<a class="fab fa-instagram pull-right fa-2x" href="https://www.instagram.com/skanbananas/"></a>
+  				<a class="fab fa-linkedin pull-right fa-2x" href="https://www.linkedin.com/in/jacob-anavisca-8b424ab8/"></a>
+    		</div>
 		  </div>
 		</div>
+		<script>
+		// var mainContentHeight = window.screen.height - document.getElementById("mainContent").offsetTop; //71
+		// document.getElementById("mainContent").style.height = mainContentHeight + "px";
+		// console.log(mainContentHeight + "px");
+		</script>
 		<!-- Optional JavaScript -->
 	    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -57,6 +72,24 @@ function buildHTML (cssPath = '', dynamicHtml = '') {
 
 	return html
 }
+
+/*app.get('/favicon.ico', (req, res) => {
+	var favicon = new Buffer(__dirname + "/images/android-chrome-192x192.png")
+	res.statusCode = 200
+	res.setHeader('Content-Length', favicon.length)
+	res.setHeader('Content-Type', 'image/png')
+    res.end(favicon)
+})*/
+
+//app.use("/images", express.static('images'))
+
+/*app.get('/favicon.ico', function (req, res) {
+	//var img = fs.readFileSync(__dirname + '/images/favicon.ico')
+	//express.static(__dirname + '/images/favicon.ico')
+	//res.writeHead(200, {"Content-Type": "image/x-icon"})
+	//res.end(img,'binary')
+	res.send(img)
+})*/
 
 app.get('/', function (req, res) {
 	var cssPath = 'home'
